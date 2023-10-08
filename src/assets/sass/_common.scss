@@ -1,49 +1,45 @@
 @import './helpers/_variables';
+@import './helpers/_mixins.sass';
 
 @font-face {
     font-family: 'Rubik-Light';
     src: url('~@/assets/fonts/Rubik-Light.ttf') format('truetype');
-    font-weight: 200;
+    font-weight: 300;
+    font-style: normal;
 }
 
 @font-face {
     font-family: 'Rubik-Regular';
     src: url('~@/assets/fonts/Rubik-Regular.ttf') format('truetype');
     font-weight: 400;
+    font-style: normal;
 }
-
 
 @font-face {
     font-family: 'Rubik-Medium';
     src: url('~@/assets/fonts/Rubik-Medium.ttf') format('truetype');
     font-weight: 500;
+    font-style: normal;
 }
 
 @font-face {
     font-family: 'Rubik-SemiBold';
     src: url('~@/assets/fonts/Rubik-SemiBold.ttf') format('truetype');
     font-weight: 600;
+    font-style: normal;
 }
 
 @font-face {
     font-family: 'Rubik-Bold';
     src: url('~@/assets/fonts/Rubik-Bold.ttf') format('opentype');
     font-weight: 700;
+    font-style: normal;
 }
 
-@font-face {
-    font-family: 'Rubik-Bold';
-    src: url('~@/assets/fonts/Rubik-Bold.ttf') format('truetype');
-    font-weight: 800;
-}
-
-@font-face {
-    font-family: 'Rubik-Black';
-    src: url('~@/assets/fonts/Rubik-Black.ttf') format('truetype');
-    font-weight: 900;
-}
-
-#app {
+body,
+* {
+    margin: 0;
+    padding: 0;
     font-weight: 400;
     font-size: 16px;
     line-height: 1.4;
@@ -61,5 +57,21 @@
         margin-left: auto;
         margin-right: auto;
         max-width: $max-width-s;
+    }
+}
+
+.section {
+    margin-left: 10px;
+    margin-right: 10px;
+
+    a {
+        text-decoration: none;
+    }
+
+    @include rmin($desktop) {
+        margin-left: 20px;
+        margin-right: 20px;
+
+        border-radius: var(--br--25);
     }
 }
