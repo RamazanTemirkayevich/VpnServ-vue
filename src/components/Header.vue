@@ -27,15 +27,15 @@
                         <a href="#">Help</a>
                     </li>
                 </ul>
+                <div class="header-nav__actions"
+                    :class="{
+                        'active': isBtnsActive
+                    }"
+                >
+                    <a href="#">Sign In</a>
+                    <a href="#" class="btn btn--stroke">Sign Up</a>
+                </div>
             </nav>
-            <div class="header-actions"
-                :class="{
-                    'active': isBtnsActive
-                }"
-            >
-                <a href="#">Sign In</a>
-                <a href="#" class="btn btn--stroke">Sign Up</a>
-            </div>
             <div class="header-burger" type="button"
                 :class="{
                     'active': isBurgerActive
@@ -80,6 +80,9 @@ export default {
         align-items: center;
         gap: 10px;
 
+        width: 35px;
+        height: 37px;
+
         z-index: 10;
 
         p {
@@ -95,39 +98,21 @@ export default {
 
             color: var(--black);
         }
-    }
 
-    &-actions {
-        display: none;
-
-        transition: .6s;
-        animation: anim 1s ease;
-
-        a:nth-child(1) {
-            font-weight: 700;
-        }
-
-        &.active {
-            position: absolute;
-
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-
-            gap: 15px;
-
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-
-            z-index: 9;
+        img {
+            width: 100%;
+            height: 100%;
         }
     }
 
     &-nav {
-        position: absolute;
+        position: fixed;
 
         display: none;
+
+        padding: 150px 0 30px;
+
+        gap: 50px;
 
         top: 0;
         left: 0;
@@ -137,16 +122,17 @@ export default {
 
         transition: .6s;
         animation: anim 1s ease;
-        touch-action: none;
         background-color: var(--white);
-        overflow: hidden;
+        overflow: scroll;
 
         z-index: 9;
 
         &.active {
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between;
+
+            flex-direction: column;
 
             width: 100%;
         }
@@ -182,6 +168,22 @@ export default {
                     animation: underline 0.3s;
                 }
             }
+        }
+    }
+
+    &-nav__actions {
+        display: none;
+
+        a:nth-child(1) {
+            font-weight: 700;
+        }
+
+        &.active {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            gap: 15px;
         }
     }
 
