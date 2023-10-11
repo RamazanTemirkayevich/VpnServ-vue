@@ -45,6 +45,7 @@ body,
     line-height: 1.4;
     font-family: $font-main;
     font-weight: 400;
+    color: var(--black);
 }
 
 .container {
@@ -73,5 +74,53 @@ body,
         margin-right: 20px;
 
         border-radius: var(--br--25);
+    }
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 13px 45px;
+
+    border-radius: var(--br--50);
+
+    &--stroke {
+        border: 1px solid var(--primary-500);
+
+        color: var(--primary-500);
+    }
+
+    &--filled {
+        position: relative;
+
+        border: none;
+        background-color: var(--primary-500);
+
+        color: var(--white);
+
+        &-br {
+            border-radius: 10px;
+        }
+
+        &::after {
+            position: absolute;
+
+            content: '';
+
+            width: 85%;
+            height: 60px;
+
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+
+            border-radius: 10px;
+            background: rgba(245, 56, 56, 0.35);
+            filter: blur(27px);
+
+            z-index: -1;
+        }
     }
 }

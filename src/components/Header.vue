@@ -5,7 +5,11 @@
                 <img src="@/assets/icons/logo.svg" alt="">
                 <p>Lasles<span>VPN</span></p>
             </div>
-            <nav class="header-nav">
+            <nav class="header-nav"
+                :class="{
+                    'active': isMenuActive
+                }"
+            >
                 <ul class="header-nav__menu">
                     <li class="header-nav__list">
                         <a href="#">About</a>
@@ -24,16 +28,44 @@
                     </li>
                 </ul>
             </nav>
-            <div class="header-actions">
+            <div class="header-actions"
+                :class="{
+                    'active': isBtnsActive
+                }"
+            >
                 <a href="#">Sign In</a>
-                <a href="#">Sign Up</a>
+                <a href="#" class="btn btn--stroke">Sign Up</a>
             </div>
-            <div class="header-burger hamburger--squeeze" type="button">
-                <span class="hamburger-inner"></span>
+            <div class="header-burger" type="button"
+                :class="{
+                    'active': isBurgerActive
+                }"
+                @click.prevent="toggle">
+                <span></span>
             </div>
         </header>
     </section>
 </template>
+
+<script>
+export default {
+    name: 'burger',
+    data: () => ({
+        isBurgerActive: false,
+        isMenuActive: false,
+        isBtnsActive: false
+    }),
+    methods: {
+        toggle () {
+            this.isBurgerActive = !this.isBurgerActive
+            this.isMenuActive = !this.isMenuActive
+            this.isBtnsActive = !this.isBtnsActive
+            this.$emit('active')
+            this.$emit('active')
+        }
+    }
+}
+</script>
 
 <style lang="scss" scoped>
 .header {
@@ -47,17 +79,120 @@
         display: flex;
         align-items: center;
         gap: 10px;
+
+        z-index: 10;
+
+        p {
+            font-size: 20px;
+            font-weight: 500;
+
+            color: var(--black);
+        }
+
+        p span {
+            font-size: 20px;
+            font-weight: 700;
+
+            color: var(--black);
+        }
     }
 
-    &-nav,
     &-actions {
         display: none;
+
+        transition: .6s;
+        animation: anim 1s ease;
+
+        a:nth-child(1) {
+            font-weight: 700;
+        }
+
+        &.active {
+            position: absolute;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            gap: 15px;
+
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+
+            z-index: 9;
+        }
+    }
+
+    &-nav {
+        position: absolute;
+
+        display: none;
+
+        top: 0;
+        left: 0;
+
+        width: 0;
+        height: 100%;
+
+        transition: .6s;
+        animation: anim 1s ease;
+        touch-action: none;
+        background-color: var(--white);
+        overflow: hidden;
+
+        z-index: 9;
+
+        &.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            width: 100%;
+        }
+
+        &.active &__menu {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            gap: 15px;
+        }
+
+        &.active &__list a {
+            position: relative;
+
+            font-size: 22px;
+
+            color: var(--gray-50);
+
+            &:hover {
+                &::after {
+                    position: absolute;
+
+                    content: '';
+
+                    bottom: -3px;
+                    left: 0;
+
+                    width: 100%;
+                    height: 3px;
+
+                    background-color: var(--gray-50);
+                    animation: underline 0.3s;
+                }
+            }
+        }
     }
 
     &-burger {
         position: relative;
         width: 25px;
         height: 21px;
+
+        z-index: 10;
+
+        cursor: pointer;
 
         &::after,
         &::before {
@@ -69,6 +204,8 @@
             height: 3px;
 
             background-color: var(--gray-50);
+            border-radius: var(--br--5);
+            transition: .3s;
         }
 
         &::before {
@@ -106,6 +243,7 @@
         top: 44%;
 
         background-color: var(--gray-50);
+        border-radius: var(--br--5);
         transition: .3s;
     }
 }
